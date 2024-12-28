@@ -39,12 +39,10 @@ std::ptrdiff_t getAddress(std::string addr)
 {
     std::vector<std::string> lines = SplitLines(DownloadURL("https://raw.githubusercontent.com/a2x/cs2-dumper/refs/heads/main/output/offsets.hpp"));
 
-    // Extract lines containing "gModule" and get the rest of the line
+    // Extract lines containing address name and get the rest of the line
     std::string keyword = addr;
     std::vector<std::string> results = ExtractLinesWithKeyword(lines, keyword);
 
-    // Print the extracted data
-    std::cout << "Extracted data:" << std::endl;
     for (const auto& result : results) {
         std::string str1 = ReplaceAll(result, "= ", "");
         std::string str2 = ReplaceAll(str1, ";", "");
