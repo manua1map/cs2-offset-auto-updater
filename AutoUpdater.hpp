@@ -61,7 +61,6 @@ std::ptrdiff_t getClientAddress(std::string addr) //very scuffed
     std::string keyword = addr;
     std::vector<std::string> results = ExtractLinesWithKeyword(lines, keyword);
 
-    std::cout << "Extracted data:" << std::endl;
     for (const auto& result : results) {
         std::string str1 = ReplaceAll(result, "= ", "");
         std::string str2 = ReplaceAll(str1, ";", "");
