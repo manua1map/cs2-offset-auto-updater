@@ -1,43 +1,63 @@
-#include <Windows.h>
-#include <WinINet.h>
+/*
+    File: web.h
+    Author: github.com/xen2cute
+*/
+
 #include <string>
+#include <windows.h>
+#include <wininet.h>
+#include <stdexcept>
 #pragma comment(lib, "wininet") 
-std::string ReplaceAll(std::string subject, const std::string& search,
-    const std::string& replace) {
-    size_t pos = 0;
-    while ((pos = subject.find(search, pos)) != std::string::npos) {
-        subject.replace(pos, search.length(), replace);
-        pos += replace.length();
+
+std::string ReplaceAll(const std::string& input, const std::string& target, const std::string& replacement) {
+    std::string result = input;
+    size_t position = 0;
+    while ((position = result.find(target, position)) != std::string::npos) {
+        result.replace(position, target.length(), replacement);
+        position += replacement.length();
     }
-    return subject;
+    return result;
 }
 
-std::string DownloadURL(const char* URL) {
-    try
-    {
-        HINTERNET interwebs = InternetOpenA("Mozilla/5.0", INTERNET_OPEN_TYPE_DIRECT, NULL, NULL, NULL);
-        HINTERNET urlFile;
-        std::string rtn;
-        if (interwebs) {
-            urlFile = InternetOpenUrlA(interwebs, URL, NULL, NULL, NULL, NULL);
-            if (urlFile) {
-                char buffer[2000];
-                DWORD bytesRead;
-                do {
-                    InternetReadFile(urlFile, buffer, 2000, &bytesRead);
-                    rtn.append(buffer, bytesRead);
-                    memset(buffer, 0, 2000);
-                } while (bytesRead);
-                InternetCloseHandle(interwebs);
-                InternetCloseHandle(urlFile);
-                std::string p = ReplaceAll(rtn, "|n", "\r\n");
-                return p;
-            }
+std::string DownloadURL(const std::string& url) {
+    HINTERNET internetSession = nullptr;
+    HINTERNET urlHandle = nullptr;
+    std::string content;
+
+    try {
+        internetSession = InternetOpenA("Mozilla/5.0", INTERNET_OPEN_TYPE_DIRECT, nullptr, nullptr, 0);
+        if (!internetSession) {
+            throw std::runtime_error("Failed to initialize internet session.");
         }
-        if (interwebs != 0)
-            InternetCloseHandle(interwebs);
-        std::string p = ReplaceAll(rtn, "|n", "\r\n");
-        return p;
+
+        urlHandle = InternetOpenUrlA(internetSession, url.c_str(), nullptr, 0, 0, 0);
+        if (!urlHandle) {
+            throw std::runtime_error("Failed to open URL.");
+        }
+
+        char buffer[2048];
+        DWORD bytesRead = 0;
+        do {
+            if (InternetReadFile(urlHandle, buffer, sizeof(buffer) - 1, &bytesRead) && bytesRead > 0) {
+                content.append(buffer, bytesRead);
+            }
+            else {
+                break;
+            }
+        } while (bytesRead > 0);
+
     }
-    catch (std::exception err) { MessageBoxA(0, err.what(), "ERROR", 0); }
+    catch (const std::exception& e) {
+        MessageBoxA(nullptr, e.what(), "ERROR", MB_ICONERROR);
+    }
+
+    if (urlHandle) {
+        InternetCloseHandle(urlHandle);
+    }
+    if (internetSession) {
+        InternetCloseHandle(internetSession);
+    }
+
+    return ReplaceAll(content, "|n", "\r\n");
 }
+
