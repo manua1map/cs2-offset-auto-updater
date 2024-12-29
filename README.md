@@ -2,8 +2,9 @@ A very simple and lightweight auto updater for Counter Strike 2 offsets. uses a 
 
 For best results output address to check if it's valid. Keep in mind it converts the address to hex.
 
-Example usage:
 getAddress function takes 2 arguments, address name and URL Index. Address name must be from a2x github repository, URL Index ranges from 1 and 2, 1 being offsets.hpp, 2 being client_dll.hpp.
+
+Example usage:
 ~~~cpp
 namespace offsets {
 	std::ptrdiff_t dwEntityList = getAddress("dwEntityList", 1); // returns correct address because there is only one result for "dwEntityList"
