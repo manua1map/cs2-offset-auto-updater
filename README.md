@@ -1,4 +1,4 @@
-A very simple and lightweight auto updater for cs2 offsets. uses a DownloadURL function to get the offsets from a2x's github repository. 
+A very simple and lightweight auto updater for Counter Strike 2 offsets. uses a DownloadURL function to get the offsets from a2x's github repository. 
 
 Example usage:
 
