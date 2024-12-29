@@ -35,9 +35,17 @@ std::vector<std::string> ExtractLines(const std::vector<std::string>& lines, con
 }
 
 
-std::ptrdiff_t getAddress(std::string addrName)
+std::ptrdiff_t getAddress(std::string addrName, int url)
 {
-    std::vector<std::string> lines = SplitLines(DownloadURL("https://raw.githubusercontent.com/a2x/cs2-dumper/refs/heads/main/output/offsets.hpp"));
+    std::string uRL;
+
+    if (url == 1)
+        uRL = "https://raw.githubusercontent.com/a2x/cs2-dumper/refs/heads/main/output/offsets.hpp";
+    else if (url == 2)
+        uRL = "https://raw.githubusercontent.com/a2x/cs2-dumper/refs/heads/main/output/client_dll.hpp";
+
+
+    std::vector<std::string> lines = SplitLines(DownloadURL(uRL.c_str()));
 
     std::string aaa = addrName;
     std::vector<std::string> results = ExtractLines(lines, aaa);
@@ -46,33 +54,10 @@ std::ptrdiff_t getAddress(std::string addrName)
         std::string str1 = ReplaceAll(result, "= ", "");
         std::string str2 = ReplaceAll(str1, ";", "");
 
+        MessageBoxA(0, str2.c_str(), "", 0);
         unsigned int hexValue = std::stoul(str2, nullptr, 16);
         return hexValue;
     }
 
     return 0;
-}
-
-
-std::ptrdiff_t getClientAddress(std::string addrName)
-{
-    std::vector<std::string> lines = SplitLines(DownloadURL("https://raw.githubusercontent.com/a2x/cs2-dumper/refs/heads/main/output/client_dll.hpp"));
-
-    std::string aaa = addrName;
-    std::vector<std::string> results = ExtractLines(lines, aaa);
-
-    for (const auto& result : results) {
-        std::string str1 = ReplaceAll(result, "= ", "");
-        std::string str2 = ReplaceAll(str1, ";", "");
-
-        str2 = ReplaceAll(str2, "// int32", "");
-        str2 = ReplaceAll(str2, "// uint8", "");
-        str2 = ReplaceAll(str2, "// uint32", "");
-        str2 = ReplaceAll(str2, "// Vector", "");
-        str2 = ReplaceAll(str2, "// CHandle<C_CSPlayerPawn>", "");
-
-        unsigned int hexValue = std::stoul(str2, nullptr, 16);
-        return hexValue;
-    }
-
 }
