@@ -1,9 +1,7 @@
 /*
-
     File: AutoUpdater.hpp
     Author: github.com/xen2cute
-    Desc: Auto offset/address updater for Counter-Strike 2. May not correctly obtain all addresses, for best results output the address and make sure it is valid.
-
+    Desc: Auto offset/address updater for Counter-Strike 2. May not correctly obtain all addresses, for best results output the address and make sure it is valid, all addresses are converted to hex.
 */
 
 #include <iostream>
@@ -52,9 +50,9 @@ std::ptrdiff_t getAddress(std::string addrName, int url)
 
     for (const auto& result : results) {
         std::string str1 = ReplaceAll(result, "= ", "");
-        std::string str2 = ReplaceAll(str1, ";", "");
+        str1 = ReplaceAll(str1, ";", "");
 
-        unsigned int hexValue = std::stoul(str2, nullptr, 16);
+        unsigned int hexValue = std::stoul(str1, nullptr, 16);
         return hexValue;
     }
 
