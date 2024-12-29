@@ -1,7 +1,8 @@
 /*
  
-	File: autoupdater.hpp
-	Desc: auto offset/address updater for Counter-Strike 2. may not correctly obtain all addresses
+	File: AutoUpdater.hpp
+ 	Author: github.com/xen2cute
+	Desc: Auto offset/address updater for Counter-Strike 2. May not correctly obtain all addresses, for best results output the address and make sure it is valid.
    
 */
 
@@ -34,11 +35,11 @@ std::vector<std::string> ExtractLinesWithKeyword(const std::vector<std::string>&
 }
 
 
-std::ptrdiff_t getAddress(std::string addr)
+std::ptrdiff_t getAddress(std::string addrName)
 {
     std::vector<std::string> lines = SplitLines(DownloadURL("https://raw.githubusercontent.com/a2x/cs2-dumper/refs/heads/main/output/offsets.hpp"));
 
-    std::string keyword = addr;
+    std::string keyword = addrName;
     std::vector<std::string> results = ExtractLinesWithKeyword(lines, keyword);
 
     for (const auto& result : results) {
@@ -53,11 +54,11 @@ std::ptrdiff_t getAddress(std::string addr)
 }
 
 
-std::ptrdiff_t getClientAddress(std::string addr)
+std::ptrdiff_t getClientAddress(std::string addrName)
 {
     std::vector<std::string> lines = SplitLines(DownloadURL("https://raw.githubusercontent.com/a2x/cs2-dumper/refs/heads/main/output/client_dll.hpp"));
 
-    std::string keyword = addr;
+    std::string keyword = addrName;
     std::vector<std::string> results = ExtractLinesWithKeyword(lines, keyword);
 
     for (const auto& result : results) {
