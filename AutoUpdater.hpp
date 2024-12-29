@@ -54,7 +54,6 @@ std::ptrdiff_t getAddress(std::string addrName, int url)
         std::string str1 = ReplaceAll(result, "= ", "");
         std::string str2 = ReplaceAll(str1, ";", "");
 
-        MessageBoxA(0, str2.c_str(), "", 0);
         unsigned int hexValue = std::stoul(str2, nullptr, 16);
         return hexValue;
     }
