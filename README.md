@@ -12,7 +12,7 @@ namespace offset {
 ~~~
 however when using client_dll, there will likely be multiple matches for the address name, so you will have to be more specific.
 
-Example of **incorrect** usage when using getClientAddress:
+Example of **incorrect** usage when using client_dll:
 ~~~cpp
 namespace offset {
 	std::ptrdiff_t m_iHealth = getClientAddress("m_iHealth", 2); // returns 0
