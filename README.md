@@ -15,4 +15,5 @@ namespace offset {
 
 	std::ptrdiff_t m_vOldOrigin = getClientAddress("constexpr std::ptrdiff_t m_vOldOrigin = "); // will work
 	std::ptrdiff_t m_iHealth = getClientAddress("constexpr std::ptrdiff_t m_iHealth = "); // will work
+}
 ~~~
