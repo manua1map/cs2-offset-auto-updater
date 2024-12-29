@@ -35,13 +35,12 @@ std::vector<std::string> ExtractLines(const std::vector<std::string>& lines, con
 
 std::ptrdiff_t getAddress(std::string addrName, int url)
 {
-    std::string uRL;
+    std::string uRL = "https://raw.githubusercontent.com/a2x/cs2-dumper/refs/heads/main/output";
 
     if (url == 1)
-        uRL = "https://raw.githubusercontent.com/a2x/cs2-dumper/refs/heads/main/output/offsets.hpp";
+        uRL = uRL + "/offsets.hpp";
     else if (url == 2)
-        uRL = "https://raw.githubusercontent.com/a2x/cs2-dumper/refs/heads/main/output/client_dll.hpp";
-
+        uRL = uRL + "/client_dll.hpp";
 
     std::vector<std::string> lines = SplitLines(DownloadURL(uRL.c_str()));
 
