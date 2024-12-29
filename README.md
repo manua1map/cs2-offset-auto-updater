@@ -10,9 +10,9 @@ namespace offset {
 however when using getClientAddress, there will likely be multiple matches for the address name, so you will have to be more specific:
 ~~~
 namespace offset {
-  std::ptrdiff_t m_vOldOrigin = getClientAddress("m_vOldOrigin"); // wont work
-  std::ptrdiff_t m_iHealth = getClientAddress("m_iHealth"); // wont work
+	std::ptrdiff_t m_vOldOrigin = getClientAddress("m_vOldOrigin"); // wont work
+	std::ptrdiff_t m_iHealth = getClientAddress("m_iHealth"); // wont work
 
 	std::ptrdiff_t m_vOldOrigin = getClientAddress("constexpr std::ptrdiff_t m_vOldOrigin = "); // will work
-  std::ptrdiff_t m_iHealth = getClientAddress("constexpr std::ptrdiff_t m_iHealth = "); // will work
+	std::ptrdiff_t m_iHealth = getClientAddress("constexpr std::ptrdiff_t m_iHealth = "); // will work
 ~~~
