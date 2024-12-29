@@ -6,20 +6,21 @@ Example usage:
 
 ~~~cpp
 namespace offset {
-	std::ptrdiff_t dwEntityList = getAddress("dwEntityList"); // returns correct address because there is only one result for "dwEntityList"
+	std::ptrdiff_t dwEntityList = getAddress("dwEntityList", 1); // returns correct address because there is only one result for "dwEntityList"
+	// second argument will take either 1 or 2, 1 will download from offsets.hpp, 2 will download from client_dll.hpp
 }
 ~~~
-however when using getClientAddress, there will likely be multiple matches for the address name, so you will have to be more specific.
+however when using client_dll, there will likely be multiple matches for the address name, so you will have to be more specific.
 
 Example of **incorrect** usage when using getClientAddress:
 ~~~cpp
 namespace offset {
-	std::ptrdiff_t m_iHealth = getClientAddress("m_iHealth"); // returns 0
+	std::ptrdiff_t m_iHealth = getClientAddress("m_iHealth", 2); // returns 0
 }
 ~~~
 Example of **correct** usage:
 ~~~cpp
 namespace offset {
-	std::ptrdiff_t m_iHealth = getClientAddress("constexpr std::ptrdiff_t m_iHealth = "); // returns correct address
+	std::ptrdiff_t m_iHealth = getClientAddress("constexpr std::ptrdiff_t m_iHealth = ", 2); // returns correct address
 }
 ~~~
