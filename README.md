@@ -5,7 +5,7 @@ For best results output address to check if it's valid. Keep in mind it converts
 Example usage:
 
 ~~~cpp
-namespace offset {
+namespace offsets {
 	std::ptrdiff_t dwEntityList = getAddress("dwEntityList", 1); // returns correct address because there is only one result for "dwEntityList"
 	// second argument will take either 1 or 2, 1 will download from offsets.hpp, 2 will download from client_dll.hpp
 }
@@ -14,13 +14,13 @@ however when using client_dll, there will likely be multiple matches for the add
 
 Example of **incorrect** usage when using client_dll:
 ~~~cpp
-namespace offset {
+namespace client_dll {
 	std::ptrdiff_t m_iHealth = getClientAddress("m_iHealth", 2); // returns 0
 }
 ~~~
 Example of **correct** usage:
 ~~~cpp
-namespace offset {
+namespace client_dll {
 	std::ptrdiff_t m_iHealth = getClientAddress("constexpr std::ptrdiff_t m_iHealth = ", 2); // returns correct address
 }
 ~~~
