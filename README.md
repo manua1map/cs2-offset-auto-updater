@@ -1,5 +1,7 @@
 A very simple and lightweight auto updater for Counter Strike 2 offsets. uses a DownloadURL function to get the offsets from a2x's github repository. 
 
+For best results output address to check if it's valid. Keep in mind it converts the address to hex.
+
 Example usage:
 
 ~~~cpp
