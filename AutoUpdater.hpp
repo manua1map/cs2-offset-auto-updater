@@ -11,6 +11,8 @@
 #include <algorithm>
 #include "web.h"
 
+std::string uRL;
+
 std::vector<std::string> SplitLines(const std::string& data) {
     std::vector<std::string> lines;
     std::istringstream stream(data);
@@ -35,7 +37,7 @@ std::vector<std::string> ExtractLines(const std::vector<std::string>& lines, con
 
 std::ptrdiff_t getAddress(std::string addrName, int url)
 {
-    std::string uRL = "https://raw.githubusercontent.com/a2x/cs2-dumper/refs/heads/main/output";
+    uRL = "https://raw.githubusercontent.com/a2x/cs2-dumper/refs/heads/main/output";
 
     if (url == 1)
         uRL = uRL + "/offsets.hpp";
