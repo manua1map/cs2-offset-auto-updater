@@ -3,7 +3,7 @@
 
 A very simple and lightweight auto updater for Counter Strike 2 offsets. uses a DownloadURL function to get the offsets from a2x's github repository: https://github.com/a2x/cs2-dumper
 
-For best results output address to check if it's valid. Keep in mind it converts the address to hex.
+For best results output address to check if it's valid. Keep in mind it converts the address to decimal.
 
 getAddress function takes 2 arguments, address name and URL Index. Address name must be from a2x github repository, URL Index ranges from 1 and 2, 1 will download offsets.hpp, 2 will download client_dll.hpp.
 
