@@ -1,7 +1,7 @@
 /*
     File: AutoUpdater.hpp
     Author: github.com/xen2cute
-    Desc: Auto offset/address updater for Counter-Strike 2. May not correctly obtain all addresses, for best results output the address and make sure it is valid, all addresses are converted to hex.
+    Desc: Auto offset/address updater for Counter-Strike 2. May not correctly obtain all addresses, for best results output the address and make sure it is valid, all addresses are converted to decimal.
 */
 
 #include <iostream>
