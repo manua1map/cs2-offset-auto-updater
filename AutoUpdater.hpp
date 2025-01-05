@@ -1,7 +1,7 @@
 /*
     File: AutoUpdater.hpp
     Author: github.com/xen2cute
-    Desc: Auto offset/address updater for Counter-Strike 2. May not correctly obtain all addresses, for best results output the address and make sure it is valid, all addresses are converted to decimal.
+    Desc: Auto offset/address updater for Counter-Strike 2. May not correctly obtain all addresses, for best results output the address and make sure it is valid, all addresses are converted to hex.
 */
 
 #include <iostream>
@@ -12,6 +12,7 @@
 #include "web.h"
 
 std::string uRL;
+URLSession session;
 
 std::vector<std::string> SplitLines(const std::string& data) {
     std::vector<std::string> lines;
@@ -44,7 +45,19 @@ std::ptrdiff_t getAddress(std::string addrName, int url)
     else if (url == 2)
         uRL = uRL + "/client_dll.hpp";
 
-    std::vector<std::string> lines = SplitLines(DownloadURL(uRL.c_str()));
+
+    if (!session.OpenSession()) {
+        std::cerr << "Failed to open session." << std::endl;
+    }
+
+    if (!session.OpenURL(uRL)) {
+        std::cerr << "Failed to open URL." << std::endl;
+    }
+
+    std::string content = session.ReadContent();
+
+
+    std::vector<std::string> lines = SplitLines(content);
 
     std::string aaa = addrName;
     std::vector<std::string> results = ExtractLines(lines, aaa);
@@ -52,7 +65,6 @@ std::ptrdiff_t getAddress(std::string addrName, int url)
     for (const auto& result : results) {
         std::string str1 = ReplaceAll(result, "= ", "");
         str1 = ReplaceAll(str1, ";", "");
-
         unsigned int hexValue = std::stoul(str1, nullptr, 16);
         return hexValue;
     }
