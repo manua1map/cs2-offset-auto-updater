@@ -10,6 +10,9 @@ int main()
 	for (int i = 0; i < client_dll_offsetList.size(); i++)
 		std::cout << client_dll_offsetList[i] << " --> " << getAddress(client_dll_offsetList[i], 1) << std::endl;
 
+	session.CloseURL();
+	session.CloseSession();
+
 	Sleep(-1);
 
 	return 0;
