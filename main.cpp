@@ -5,13 +5,12 @@
 
 int main()
 {
-	for (int i = 0; i < 17; i++) // 'i' is equal to the number of addresses scanned 
-	{
-		std::vector<std::string> client_dll_offsetList = { "dwCSGOInput", "dwEntityList", "dwGameEntitySystem", "dwGameEntitySystem_highestEntityIndex", "dwGameRules", "dwGlobalVars", "dwGlowManager", "dwLocalPlayerController", "dwLocalPlayerPawn", "dwPlantedC4", "dwPrediction", "dwSensitivity", "dwSensitivity_sensitivity", "dwViewAngles", "dwViewMatrix", "dwViewRender", "dwWeaponC4"};
-		std::cout << client_dll_offsetList[i] << " --> " << getAddress(client_dll_offsetList[i], 1) << std::endl;
-	}
+	std::vector<std::string> client_dll_offsetList = { "dwCSGOInput", "dwEntityList", "dwGameEntitySystem", "dwGameEntitySystem_highestEntityIndex", "dwGameRules", "dwGlobalVars", "dwGlowManager", "dwLocalPlayerController", "dwLocalPlayerPawn", "dwPlantedC4", "dwPrediction", "dwSensitivity", "dwSensitivity_sensitivity", "dwViewAngles", "dwViewMatrix", "dwViewRender", "dwWeaponC4" };
 
-	Sleep(-1); // pause console indefinitly 
+	for (int i = 0; i < client_dll_offsetList.size(); i++)
+		std::cout << client_dll_offsetList[i] << " --> " << getAddress(client_dll_offsetList[i], 1) << std::endl;
+
+	Sleep(-1);
 
 	return 0;
 }
