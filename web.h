@@ -3,13 +3,15 @@
     Author: github.com/xen2cute
 */
 
+#include <iostream>
 #include <string>
 #include <windows.h>
 #include <wininet.h>
 #include <stdexcept>
 #pragma comment(lib, "wininet") 
+#define URLSESSION_H
 
-std::string ReplaceAll(const std::string& input, const std::string& target, const std::string& replacement) {
+inline std::string ReplaceAll(const std::string& input, const std::string& target, const std::string& replacement) {
     std::string result = input;
     size_t position = 0;
     while ((position = result.find(target, position)) != std::string::npos) {
@@ -19,45 +21,56 @@ std::string ReplaceAll(const std::string& input, const std::string& target, cons
     return result;
 }
 
-std::string DownloadURL(const std::string& url) {
-    HINTERNET internetSession = nullptr;
-    HINTERNET urlHandle = nullptr;
-    std::string content;
+class URLSession {
+private:
+    HINTERNET internetSession;
+    HINTERNET urlHandle;
 
-    try {
-        internetSession = InternetOpenA("Mozilla/5.0", INTERNET_OPEN_TYPE_DIRECT, nullptr, nullptr, 0);
-        if (!internetSession) {
-            throw std::runtime_error("Failed to initialize internet session.");
-        }
+public:
+    URLSession() : internetSession(nullptr), urlHandle(nullptr) {}
 
+    bool OpenSession(const std::string& userAgent = "Mozilla/5.0") {
+        internetSession = InternetOpenA(userAgent.c_str(), INTERNET_OPEN_TYPE_DIRECT, nullptr, nullptr, 0);
+        return internetSession != nullptr;
+    }
+
+    bool OpenURL(const std::string& url) {
+        if (!internetSession) return false;
         urlHandle = InternetOpenUrlA(internetSession, url.c_str(), nullptr, 0, 0, 0);
-        if (!urlHandle) {
-            throw std::runtime_error("Failed to open URL.");
-        }
+        return urlHandle != nullptr;
+    }
+
+    std::string ReadContent() {
+        std::string content;
+        if (!urlHandle) return content;
 
         char buffer[2048];
         DWORD bytesRead = 0;
-        do {
-            if (InternetReadFile(urlHandle, buffer, sizeof(buffer) - 1, &bytesRead) && bytesRead > 0) {
-                content.append(buffer, bytesRead);
-            }
-            else {
-                break;
-            }
-        } while (bytesRead > 0);
 
-    }
-    catch (const std::exception& e) {
-        MessageBoxA(nullptr, e.what(), "ERROR", MB_ICONERROR);
+        while (InternetReadFile(urlHandle, buffer, sizeof(buffer) - 1, &bytesRead) && bytesRead > 0) {
+            content.append(buffer, bytesRead);
+        }
+
+        return ReplaceAll(content, "|n", "\r\n");
     }
 
-    if (urlHandle) {
-        InternetCloseHandle(urlHandle);
-    }
-    if (internetSession) {
-        InternetCloseHandle(internetSession);
+    void CloseURL() {
+        if (urlHandle) {
+            InternetCloseHandle(urlHandle);
+            urlHandle = nullptr;
+        }
     }
 
-    return ReplaceAll(content, "|n", "\r\n");
-}
+    void CloseSession() {
+        if (internetSession) {
+            InternetCloseHandle(internetSession);
+            internetSession = nullptr;
+        }
+    }
+
+    ~URLSession() {
+        CloseURL();
+        CloseSession();
+    }
+};
 
