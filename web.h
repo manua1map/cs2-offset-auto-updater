@@ -1,6 +1,6 @@
 /*
     File: web.h
-    Author: github.com/xen2cute
+    Author: github.com/t0ughknuckles
 */
 
 #include <iostream>
