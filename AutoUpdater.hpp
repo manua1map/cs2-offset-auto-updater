@@ -2,6 +2,7 @@
     File: AutoUpdater.hpp
     Author: github.com/t0ughknuckles
     Desc: Auto offset/address updater for Counter-Strike 2. May not correctly obtain all addresses, for best results output the address and make sure it is valid, all addresses are converted to decimal.
+    After use of the getAddress function, it is important to call the closeWeb() function.
 */
 
 #include <iostream>
@@ -35,7 +36,6 @@ std::vector<std::string> ExtractLines(const std::vector<std::string>& lines, con
     return results;
 }
 
-
 std::ptrdiff_t getAddress(std::string addrName, int url)
 {
     uRL = "https://raw.githubusercontent.com/a2x/cs2-dumper/refs/heads/main/output";
@@ -45,29 +45,27 @@ std::ptrdiff_t getAddress(std::string addrName, int url)
     else if (url == 2)
         uRL = uRL + "/client_dll.hpp";
 
-
-    if (!session.OpenSession()) {
+    if (!session.OpenSession()) 
         std::cerr << "Failed to open session." << std::endl;
-    }
 
-    if (!session.OpenURL(uRL)) {
+    if (!session.OpenURL(uRL))
         std::cerr << "Failed to open URL." << std::endl;
-    }
 
-    std::string content = session.ReadContent();
-
-
-    std::vector<std::string> lines = SplitLines(content);
-
-    std::string aaa = addrName;
-    std::vector<std::string> results = ExtractLines(lines, aaa);
+    std::vector<std::string> lines = SplitLines(session.ReadContent());
+    std::vector<std::string> results = ExtractLines(lines, addrName);
 
     for (const auto& result : results) {
         std::string str1 = ReplaceAll(result, "= ", "");
         str1 = ReplaceAll(str1, ";", "");
-        unsigned int decValue = std::stoul(str1, nullptr, 16);
+        unsigned int decValue = std::stoul(str1, nullptr, 16); 
         return decValue;
     }
 
     return 0;
+}
+
+inline void closeWeb(URLSession session)
+{
+    session.CloseSession();
+    session.CloseURL();
 }
