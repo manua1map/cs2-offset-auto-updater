@@ -15,14 +15,14 @@ namespace offsets {
 
 int main()
 {
-	std::vector<std::string> addrArray = { "dwEntityList", "dwViewMatrix" }
+	std::vector<std::string> addrArray = { "dwEntityList", "dwViewMatrix" };
 
 	for(int i = 0; i < addrArray.size(); i++)
 	{
 		std::cout << addrArray[i] << ": " << dwEntityList; // output each address in decimal
 	}
 
-	closeWeb(session)
+	closeWeb(session);
 	return 0;
 }
 ~~~
