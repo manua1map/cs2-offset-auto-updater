@@ -14,7 +14,7 @@ int main() {
 
 	for(int i = 0; i < addrArray.size(); i++)
 	{
-		std::cout << addrArray[i] << ": " << getAddress(addrArray[i], 1); // output each address in decimal
+		std::cout << addrArray[i] << ": " << getAddress(addrArray[i], 1) << std::endl; // output each address in decimal
 	}
 
 	closeWeb(session);
