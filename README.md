@@ -8,18 +8,13 @@ getAddress function takes 2 arguments, address name and URL Index. Address name 
 
 Example usage:
 ~~~cpp
-namespace offsets {
-	std::ptrdiff_t dwEntityList = getAddress("dwEntityList", 1); // returns correct address because there is only one result for "dwEntityList"
-
-}
-
- // this will work for actual usage when editing CS2's memory, however a very simple usage is making a "dumper":
+// this will work for actual usage when editing CS2's memory, however a very simple usage is making a "dumper":
 int main() { 
 	std::vector<std::string> addrArray = { "dwEntityList", "dwViewMatrix" };
 
 	for(int i = 0; i < addrArray.size(); i++)
 	{
-		std::cout << addrArray[i] << ": " << offsets::dwEntityList; // output each address in decimal
+		std::cout << addrArray[i] << ": " << getAddress(addrArray[i], 1); // output each address in decimal
 	}
 
 	closeWeb(session);
