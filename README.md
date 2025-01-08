@@ -13,8 +13,8 @@ namespace offsets {
 
 }
 
-int main()
-{
+ // this will work for actual usage when editing CS2's memory, however a very simple usage is making a "dumper":
+int main() { 
 	std::vector<std::string> addrArray = { "dwEntityList", "dwViewMatrix" };
 
 	for(int i = 0; i < addrArray.size(); i++)
