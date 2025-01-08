@@ -10,6 +10,20 @@ Example usage:
 ~~~cpp
 namespace offsets {
 	std::ptrdiff_t dwEntityList = getAddress("dwEntityList", 1); // returns correct address because there is only one result for "dwEntityList"
+
+}
+
+int main()
+{
+	std::vector<std::string> addrArray = { "dwEntityList", "dwViewMatrix" }
+
+	for(int i = 0; i < addrArray.size(); i++)
+	{
+		std::cout << addrArray[i] << ": " << dwEntityList; // output each address in decimal
+	}
+
+	closeWeb(session)
+	return 0;
 }
 ~~~
 however when using client_dll, there will likely be multiple matches for the address name, so you will have to be more specific.
