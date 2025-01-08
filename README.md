@@ -19,7 +19,7 @@ int main() {
 
 	for(int i = 0; i < addrArray.size(); i++)
 	{
-		std::cout << addrArray[i] << ": " << dwEntityList; // output each address in decimal
+		std::cout << addrArray[i] << ": " << offsets::dwEntityList; // output each address in decimal
 	}
 
 	closeWeb(session);
