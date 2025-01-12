@@ -64,8 +64,8 @@ std::ptrdiff_t getAddress(std::string addrName, int url)
     return 0;
 }
 
-inline void closeWeb(URLSession session)
+inline void closeWeb(URLSession s)
 {
-    session.CloseSession();
-    session.CloseURL();
+    s.CloseSession();
+    s.CloseURL();
 }
