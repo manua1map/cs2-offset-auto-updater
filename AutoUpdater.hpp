@@ -57,7 +57,7 @@ std::ptrdiff_t getAddress(std::string addrName, int url)
     for (const auto& result : results) {
         std::string str1 = ReplaceAll(result, "= ", "");
         str1 = ReplaceAll(str1, ";", "");
-        unsigned int decValue = std::stoul(str1, nullptr, 16); 
+        unsigned int decValue = std::stoul(str1, nullptr, 16); // convert str1 to a decimal value
         return decValue;
     }
 
