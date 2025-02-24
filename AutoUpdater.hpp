@@ -15,17 +15,20 @@
 std::string uRL;
 URLSession session;
 
-std::vector<std::string> SplitLines(const std::string& data) {
+std::vector<std::string> SplitLines(const std::string& data) 
+{
     std::vector<std::string> lines;
     std::istringstream stream(data);
     std::string line;
     while (std::getline(stream, line)) {
         lines.push_back(line);
     }
+    
     return lines;
 }
 
-std::vector<std::string> ExtractLines(const std::vector<std::string>& lines, const std::string& word) {
+std::vector<std::string> ExtractLines(const std::vector<std::string>& lines, const std::string& word) 
+{
     std::vector<std::string> results;
     for (const auto& line : lines) {
         size_t pos = line.find(word);
@@ -33,6 +36,7 @@ std::vector<std::string> ExtractLines(const std::vector<std::string>& lines, con
             results.push_back(line.substr(pos + word.length()));
         }
     }
+    
     return results;
 }
 
