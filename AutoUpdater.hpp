@@ -1,8 +1,7 @@
 /*
-    File: AutoUpdater.hpp
-    Author: github.com/t0ughknuckles
-    Desc: Auto offset/address updater for Counter-Strike 2. May not correctly obtain all addresses, for best results output the address and make sure it is valid, all addresses are converted to decimal.
-    After use of the getAddress function, it is important to call the closeWeb() function.
+    https://github.com/t0ughknuckles
+    
+    Auto offset/address updater for Counter-Strike 2, after use of the getAddress function call the closeWeb function.
 */
 
 #include <iostream>
@@ -15,28 +14,29 @@
 std::string uRL;
 URLSession session;
 
-std::vector<std::string> SplitLines(const std::string& data) 
+std::vector<std::string> splitLines(const std::string& data) 
 {
     std::vector<std::string> lines;
     std::istringstream stream(data);
     std::string line;
-    while (std::getline(stream, line)) {
+    while (std::getline(stream, line)) 
+    {
         lines.push_back(line);
     }
     
     return lines;
 }
 
-std::vector<std::string> ExtractLines(const std::vector<std::string>& lines, const std::string& word) 
+std::vector<std::string> extractLines(const std::vector<std::string>& lines, const std::string& word) 
 {
     std::vector<std::string> results;
-    for (const auto& line : lines) {
+    for (const auto& line : lines) 
+    {
         size_t pos = line.find(word);
-        if (pos != std::string::npos) {
+        if (pos != std::string::npos) 
             results.push_back(line.substr(pos + word.length()));
-        }
+        
     }
-    
     return results;
 }
 
@@ -55,13 +55,15 @@ std::ptrdiff_t getAddress(std::string addrName, int url)
     if (!session.OpenURL(uRL))
         std::cerr << "Failed to open URL." << std::endl;
 
-    std::vector<std::string> lines = SplitLines(session.ReadContent());
-    std::vector<std::string> results = ExtractLines(lines, addrName);
+    std::vector<std::string> lines = splitLines(session.ReadContent());
+    std::vector<std::string> results = extractLines(lines, addrName);
 
     for (const auto& result : results) {
-        std::string str1 = ReplaceAll(result, "= ", "");
+        std::string str1;
+        str1 = ReplaceAll(result, "= ", "");
         str1 = ReplaceAll(str1, ";", "");
-        unsigned int decValue = std::stoul(str1, nullptr, 16); // convert str1 to a decimal value
+        
+        unsigned int decValue = std::stoul(str1, nullptr, 16);
         return decValue;
     }
 
@@ -70,6 +72,6 @@ std::ptrdiff_t getAddress(std::string addrName, int url)
 
 inline void closeWeb(URLSession s)
 {
-    s.CloseSession();
     s.CloseURL();
+    s.CloseSession();
 }
