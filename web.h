@@ -1,7 +1,7 @@
 /*
-    File: web.h
-    Author: github.com/t0ughknuckles
+    https://github.com/t0ughknuckles
 */
+
 
 #include <iostream>
 #include <string>
