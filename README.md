@@ -1,6 +1,6 @@
 A very simple and lightweight auto offset updater that can used for any game. It works by downloading the URL contents from the offsets on a2x's github repository: https://github.com/a2x/cs2-dumper
 
-I recommend you output each address ensuring its correc, and keep in mind all addresss are converted to decimal.
+I recommend you output each address ensuring its correct, and keep in mind all addresss are converted to decimal.
 
 getAddress function takes 2 arguments, address name and URL index. Address name must be from a2x github repository, URL index ranges from 1 & 2, 1 will read from offsets.hpp, 2 will read from client_dll.hpp.
 
