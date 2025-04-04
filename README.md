@@ -1,4 +1,4 @@
-A very simple and lightweight auto offset updater that can used for any game. It works by downloading the URL contents from the offsets on a2x's github repository: https://github.com/a2x/cs2-dumper
+A very simple and lightweight auto offset updater that can used for any game. It works by downloading the URL contents from the offsets on a2x github repository: https://github.com/a2x/cs2-dumper
 
 I recommend you output each address ensuring its correct, and keep in mind all addresss are converted to decimal.
 
