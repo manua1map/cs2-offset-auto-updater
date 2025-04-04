@@ -1,14 +1,11 @@
+A very simple and lightweight auto offset updater that can used for any game. It works by downloading the URL contents from the offsets on a2x's github repository: https://github.com/a2x/cs2-dumper
 
+I recommend you output each address ensuring its correc, and keep in mind all addresss are converted to decimal.
 
-A very simple and lightweight auto updater for Counter Strike 2 offsets. uses a DownloadURL function to get the offsets from a2x's github repository: https://github.com/a2x/cs2-dumper
-
-For best results output address to check if it's valid. Keep in mind it converts the address to decimal.
-
-getAddress function takes 2 arguments, address name and URL Index. Address name must be from a2x github repository, URL Index ranges from 1 and 2, 1 will download offsets.hpp, 2 will download client_dll.hpp.
+getAddress function takes 2 arguments, address name and URL index. Address name must be from a2x github repository, URL index ranges from 1 & 2, 1 will read from offsets.hpp, 2 will read from client_dll.hpp.
 
 Example usage:
 ~~~cpp
-// this will work for actual usage when editing CS2's memory, however a very simple usage is making a "dumper":
 int main() { 
 	std::vector<std::string> addrArray = { "dwEntityList", "dwViewMatrix" };
 
@@ -21,7 +18,7 @@ int main() {
 	return 0;
 }
 ~~~
-however when using client_dll, there will likely be multiple matches for the address name, so you will have to be more specific.
+However when using client_dll, there will likely be multiple matches for the address name, so you will have to be more specific.
 
 Example of **incorrect** usage when using client_dll:
 ~~~cpp
