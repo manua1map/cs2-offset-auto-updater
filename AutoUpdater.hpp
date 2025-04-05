@@ -56,10 +56,10 @@ std::ptrdiff_t getAddress(std::string addrName, int url)
         uRL = uRL + "/client_dll.hpp";
 
     if (!session.OpenSession()) 
-        std::cerr << "Failed to open session." << std::endl;
+        std::cout << "Failed to open session." << std::endl;
 
     if (!session.OpenURL(uRL))
-        std::cerr << "Failed to open URL." << std::endl;
+        std::cout << "Failed to open URL." << std::endl;
 
     std::vector<std::string> lines = splitLines(session.ReadContent());
     std::vector<std::string> results = extractLines(lines, addrName);
