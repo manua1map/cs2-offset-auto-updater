@@ -1,7 +1,5 @@
 /*
     https://github.com/t0ughknuckles
-    
-    Auto offset/address updater for Counter-Strike 2, after use of the getAddress function call the closeWeb function.
 */
 
 #include <iostream>
