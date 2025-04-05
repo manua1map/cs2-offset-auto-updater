@@ -2,20 +2,34 @@ A very simple and lightweight auto offset updater that can used for any game. It
 
 I recommend you output each address ensuring its correct, and keep in mind all addresss are converted to decimal.
 
-getAddress function takes 2 arguments, address name and URL index. Address name must be from a2x github repository, URL index ranges from 1 & 2, 1 will read from offsets.hpp, 2 will read from client_dll.hpp.
+```getAddress``` function takes 2 arguments, address name and URL index. Address name must be from a2x github repository, URL index ranges from 1 & 2, 1 will read from offsets.hpp, 2 will read from client_dll.hpp.
 
 Example usage:
 ~~~cpp
-int main() { 
-	std::vector<std::string> addrArray = { "dwEntityList", "dwViewMatrix" };
+int main()
+{
+    /* create a new URL session */
+    URLSession session; 
 
-	for(int i = 0; i < addrArray.size(); i++)
-	{
-		std::cout << addrArray[i] << ": " << getAddress(addrArray[i], 1) << std::endl; // output each address in decimal
-	}
+    /* declare offset variables for later use */
+    std::ptrdiff_t dwEntityList = getAddress(session, "dwEntityList", 1);
+    std::ptrdiff_t dwGlowManager = getAddress(session, "dwGlowManager", 1);
+    std::ptrdiff_t m_iHealth = getAddress(session, "constexpr std::ptrdiff_t m_iHealth = ", 2);
+    std::ptrdiff_t m_skeletonInstance = getAddress(session, "std::ptrdiff_t m_skeletonInstance = ", 2);
 
-	closeWeb(session);
-	return 0;
+    /* delay to ensure every address is obtained before closing the session */
+    std::this_thread::sleep_for(std::chrono::milliseconds(25));
+
+    /* close URL session */
+    closeWeb(session);
+
+    /* output each address */
+    std::cout << "dwEntityList " << dwEntityList << std::endl;
+    std::cout << "dwGlowManager " << dwGlowManager << std::endl;
+    std::cout << "m_iHealth " << m_iHealth << std::endl;
+    std::cout << "m_skeletonInstance " << m_skeletonInstance << std::endl;
+
+    return 0;
 }
 ~~~
 However when using client_dll, there will likely be multiple matches for the address name, so you will have to be more specific.
