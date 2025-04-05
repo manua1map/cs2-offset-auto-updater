@@ -14,7 +14,13 @@
 std::string uRL;
 URLSession session;
 
-std::vector<std::string> splitLines(const std::string& data) 
+inline void closeWeb(URLSession s)
+{
+    s.CloseURL();
+    s.CloseSession();
+}
+
+inline std::vector<std::string> splitLines(const std::string& data) 
 {
     std::vector<std::string> lines;
     std::istringstream stream(data);
@@ -27,7 +33,7 @@ std::vector<std::string> splitLines(const std::string& data)
     return lines;
 }
 
-std::vector<std::string> extractLines(const std::vector<std::string>& lines, const std::string& word) 
+inline std::vector<std::string> extractLines(const std::vector<std::string>& lines, const std::string& word) 
 {
     std::vector<std::string> results;
     for (const auto& line : lines) 
@@ -70,8 +76,3 @@ std::ptrdiff_t getAddress(std::string addrName, int url)
     return 0;
 }
 
-inline void closeWeb(URLSession s)
-{
-    s.CloseURL();
-    s.CloseSession();
-}
