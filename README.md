@@ -32,9 +32,9 @@ int main()
     return 0;
 }
 ~~~
-However when using client_dll, there will likely be multiple matches for the address name, so you will have to be more specific.
+In this case when reading from client_dll.hpp there will be multiple matches for the address name, so you will have to be more specific.
 
-Example of **incorrect** usage when using client_dll:
+Example of **incorrect** usage when reading from client_dll:
 ~~~cpp
 namespace client_dll {
 	std::ptrdiff_t m_iHealth = getAddress("m_iHealth", 2); // returns 0
