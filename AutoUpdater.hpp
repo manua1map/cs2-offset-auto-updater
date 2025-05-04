@@ -11,7 +11,7 @@
 
 std::string uRL;
 
-inline void closeWeb(URLSession session)
+void closeWeb(URLSession session)
 {
     session.CloseURL();
     session.CloseSession();
