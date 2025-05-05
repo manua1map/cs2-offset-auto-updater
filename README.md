@@ -12,10 +12,10 @@ int main()
     URLSession session; 
 
     /* declare offset variables for later use */
-    std::ptrdiff_t dwEntityList = getAddress(session, "dwEntityList", 1);
-    std::ptrdiff_t dwGlowManager = getAddress(session, "dwGlowManager", 1);
-    std::ptrdiff_t m_iHealth = getAddress(session, "constexpr std::ptrdiff_t m_iHealth = ", 2);
-    std::ptrdiff_t m_skeletonInstance = getAddress(session, "std::ptrdiff_t m_skeletonInstance = ", 2);
+    uintptr_t dwEntityList = getAddress(session, "dwEntityList", 1);
+    uintptr_t dwGlowManager = getAddress(session, "dwGlowManager", 1);
+    uintptr_t m_iHealth = getAddress(session, "constexpr std::ptrdiff_t m_iHealth = ", 2);
+    uintptr_t m_skeletonInstance = getAddress(session, "std::ptrdiff_t m_skeletonInstance = ", 2);
 
     /* delay to ensure every address is obtained before closing the session */
     std::this_thread::sleep_for(std::chrono::milliseconds(25));
