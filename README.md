@@ -2,7 +2,7 @@ A very simple and lightweight auto offset updater that can used for any game. It
 
 I recommend you output each address ensuring its correct, and keep in mind all addresss are converted to decimal.
 
-```getAddress``` function takes 3 arguments, URL session, address name and URL index. Address name must be from a2x github repository, URL index 1 will read from offsets.hpp, 2 will read from client_dll.hpp.
+```getAddress``` function takes 3 arguments: URL session, address name and file type. Address name must be from a2x github repository, file type 1 will read from offsets.hpp, 2 will read from client_dll.hpp.
 
 Example usage:
 ~~~cpp
