@@ -52,11 +52,8 @@ uintptr_t getAddress(URLSession session, std::string addrName, int url)
     else if (url == 2)
         uRL += "/client_dll.hpp";
 
-    if (!session.OpenSession())
-        std::cout << "Failed to open session." << std::endl;
-
-    if (!session.OpenURL(uRL))
-        std::cout << "Failed to open URL." << std::endl;
+    if (!session.OpenSession() || !session.OpenURL(uRL))
+        return 0;
 
     std::vector<std::string> lines = splitLines(session.ReadContent());
     std::vector<std::string> results = extractLines(lines, addrName);
