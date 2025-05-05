@@ -7,7 +7,7 @@
 #include <sstream>
 #include <vector>
 #include <algorithm>
-#include "Web.hpp"
+#include "Web.h"
 
 std::string uRL;
 
@@ -43,15 +43,15 @@ inline std::vector<std::string> extractLines(const std::vector<std::string>& lin
     return results;
 }
 
-std::ptrdiff_t getAddress(URLSession session, std::string addrName, int url)
+uintptr_t getAddress(URLSession session, std::string addrName, int url)
 {
     uRL = "https://raw.githubusercontent.com/a2x/cs2-dumper/refs/heads/main/output";
 
     if (url == 1)
-        uRL = uRL + "/offsets.hpp";
+        uRL += "/offsets.hpp";
     else if (url == 2)
-        uRL = uRL + "/client_dll.hpp";
-   
+        uRL += "/client_dll.hpp";
+
     if (!session.OpenSession())
         std::cout << "Failed to open session." << std::endl;
 
@@ -63,10 +63,11 @@ std::ptrdiff_t getAddress(URLSession session, std::string addrName, int url)
 
     for (const auto& result : results) {
         std::string str1;
+
         str1 = ReplaceAll(result, "=", "");
         str1 = ReplaceAll(str1, ";", "");
 
-        unsigned int decValue = std::stoul(str1, nullptr, 16);
+        uintptr_t decValue = static_cast<uintptr_t>(std::stoul(str1, nullptr, 16));
         return decValue;
     }
 
