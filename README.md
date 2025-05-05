@@ -37,12 +37,12 @@ In this case when reading from client_dll.hpp there will be multiple matches for
 Example of **incorrect** usage when reading from client_dll:
 ~~~cpp
 namespace client_dll {
-	std::ptrdiff_t m_iHealth = getAddress(session, "m_iHealth", 2); // returns 0
+	uintptr_t m_iHealth = getAddress(session, "m_iHealth", 2); /* returns 0 */
 }
 ~~~
 Example of **correct** usage:
 ~~~cpp
 namespace client_dll {
-	std::ptrdiff_t m_iHealth = getAddress(session, "constexpr std::ptrdiff_t m_iHealth = ", 2); // returns correct address
+	uintptr_t m_iHealth = getAddress(session, "constexpr std::ptrdiff_t m_iHealth = ", 2); /* returns correct data */
 }
 ~~~
