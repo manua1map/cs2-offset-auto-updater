@@ -43,13 +43,13 @@ inline std::vector<std::string> extractLines(const std::vector<std::string>& lin
     return results;
 }
 
-uintptr_t getAddress(URLSession session, std::string addrName, int url)
+uintptr_t getAddress(URLSession session, const std::string& addrName, int fileType)
 {
     uRL = "https://raw.githubusercontent.com/a2x/cs2-dumper/refs/heads/main/output";
 
-    if (url == 1)
+    if (fileType == 1)
         uRL += "/offsets.hpp";
-    else if (url == 2)
+    else if (fileType == 2)
         uRL += "/client_dll.hpp";
 
     if (!session.OpenSession() || !session.OpenURL(uRL))
