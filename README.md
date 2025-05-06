@@ -44,6 +44,6 @@ namespace client_dll {
 Example of **correct** usage:
 ~~~cpp
 namespace client_dll {
-	uintptr_t m_iHealth = getAddress(session, "constexpr std::ptrdiff_t m_iHealth = ", 2); /* returns correct data */
+	uintptr_t m_iHealth = getAddress(session, "constexpr std::ptrdiff_t m_iHealth ", 2); /* returns correct data */
 }
 ~~~
