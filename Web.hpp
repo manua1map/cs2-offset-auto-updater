@@ -24,6 +24,17 @@ inline std::string ReplaceAll(const std::string& input, const std::string& targe
     return result;
 }
 
+inline std::string ReplaceArray(const std::string& input, const std::vector<std::string>& targets, const std::string& replacement) 
+{
+    std::string result = input;
+    for (const auto& target : targets) 
+    {
+        result = ReplaceAll(result, target, replacement);
+    }
+
+    return result;
+}
+
 class URLSession {
 private:
     HINTERNET internetSession;
