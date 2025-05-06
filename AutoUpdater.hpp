@@ -62,8 +62,7 @@ uintptr_t getAddress(URLSession session, const std::string& addrName, int fileTy
     {
         std::string resultStr;
 
-        resultStr = ReplaceAll(result, "=", "");
-        resultStr = ReplaceAll(resultStr, ";", "");
+        resultStr = ReplaceArray(result, { "=", ";" }, "");
 
         return static_cast<uintptr_t>(std::stoull(resultStr, nullptr, 16));
     }
