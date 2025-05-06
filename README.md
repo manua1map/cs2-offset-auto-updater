@@ -25,6 +25,8 @@ int main()
     closeWeb(session);
 
     /* output each address */
+
+    std::cout << std::hex;
     std::cout << "dwEntityList "       << dwEntityList << std::endl;
     std::cout << "dwGlowManager "      << dwGlowManager << std::endl;
     std::cout << "m_iHealth "          << m_iHealth << std::endl;
