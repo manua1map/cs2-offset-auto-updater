@@ -11,7 +11,7 @@
 
 std::string uRL;
 
-void closeWeb(URLSession session)
+inline void closeWeb(URLSession session)
 {
     session.CloseURL();
     session.CloseSession();
@@ -58,14 +58,14 @@ uintptr_t getAddress(URLSession session, const std::string& addrName, int fileTy
     std::vector<std::string> lines = splitLines(session.ReadContent());
     std::vector<std::string> results = extractLines(lines, addrName);
 
-    for (const auto& result : results) {
-        std::string str1;
+    for (const auto& result : results) 
+    {
+        std::string resultStr;
 
-        str1 = ReplaceAll(result, "=", "");
-        str1 = ReplaceAll(str1, ";", "");
+        resultStr = ReplaceAll(result, "=", "");
+        resultStr = ReplaceAll(resultStr, ";", "");
 
-        uintptr_t decValue = static_cast<uintptr_t>(std::stoul(str1, nullptr, 16));
-        return decValue;
+        return static_cast<uintptr_t>(std::stoull(resultStr, nullptr, 16));
     }
 
     return 0;
