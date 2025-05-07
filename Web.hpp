@@ -24,7 +24,7 @@ inline std::string ReplaceAll(const std::string& input, const std::string& targe
     return result;
 }
 
-inline std::string ReplaceArray(const std::string& input, const std::vector<std::string>& targets, const std::string& replacement) 
+inline std::string ReplaceMultiple(const std::string& input, const std::vector<std::string>& targets, const std::string& replacement) 
 {
     std::string result = input;
     for (const auto& target : targets) 
