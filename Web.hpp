@@ -9,7 +9,6 @@
 #include <wininet.h>
 #include <stdexcept>
 #pragma comment(lib, "wininet") 
-#define URLSESSION_H
 
 inline std::string ReplaceAll(const std::string& input, const std::string& target, const std::string& replacement) 
 {
