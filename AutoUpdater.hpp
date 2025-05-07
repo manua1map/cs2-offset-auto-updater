@@ -9,8 +9,6 @@
 #include <algorithm>
 #include "Web.h"
 
-std::string uRL;
-
 inline void closeWeb(URLSession session)
 {
     session.CloseURL();
@@ -45,14 +43,14 @@ inline std::vector<std::string> extractLines(const std::vector<std::string>& lin
 
 uintptr_t getAddress(URLSession session, const std::string& addrName, int fileType)
 {
-    uRL = "https://raw.githubusercontent.com/a2x/cs2-dumper/refs/heads/main/output";
+    std::string URL = "https://raw.githubusercontent.com/a2x/cs2-dumper/refs/heads/main/output";
 
     if (fileType == 1)
-        uRL += "/offsets.hpp";
+        URL += "/offsets.hpp";
     else if (fileType == 2)
-        uRL += "/client_dll.hpp";
+        URL += "/client_dll.hpp";
 
-    if (!session.OpenSession() || !session.OpenURL(uRL))
+    if (!session.OpenSession() || !session.OpenURL(URL))
         return 0;
 
     std::vector<std::string> lines = splitLines(session.ReadContent());
