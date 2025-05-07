@@ -60,7 +60,7 @@ uintptr_t getAddress(URLSession session, const std::string& addrName, int fileTy
 
     for (const auto& result : results) 
     {
-        std::string resultStr = ReplaceArray(result, { "=", ";" }, "");
+        std::string resultStr = ReplaceMultiple(result, { "=", ";" }, "");
 
         return static_cast<uintptr_t>(std::stoull(resultStr, nullptr, 16));
     }
