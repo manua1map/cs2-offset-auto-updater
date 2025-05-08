@@ -44,17 +44,23 @@ inline std::vector<std::string> extractLines(const std::vector<std::string>& lin
 uintptr_t getAddress(URLSession session, const std::string& addrName, int fileType)
 {
     std::string URL = "https://raw.githubusercontent.com/a2x/cs2-dumper/refs/heads/main/output";
+    std::string formattedName = addrName;
 
     if (fileType == 1)
         URL += "/offsets.hpp";
     else if (fileType == 2)
+    {
         URL += "/client_dll.hpp";
+
+        if (addrName.rfind("constexpr std::ptrdiff_t ", 0) != 0)
+            formattedName = "constexpr std::ptrdiff_t " + addrName + " = ";
+    }
 
     if (!session.OpenSession() || !session.OpenURL(URL))
         return 0;
 
     std::vector<std::string> lines = splitLines(session.ReadContent());
-    std::vector<std::string> results = extractLines(lines, addrName);
+    std::vector<std::string> results = extractLines(lines, formattedName);
 
     for (const auto& result : results) 
     {
