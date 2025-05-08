@@ -14,9 +14,8 @@ int main()
     /* declare offset variables for later use */
     uintptr_t dwEntityList       = getAddress(session, "dwEntityList", 1);
     uintptr_t dwGlowManager      = getAddress(session, "dwGlowManager", 1);
-
-    uintptr_t m_iHealth          = getAddress(session, "constexpr std::ptrdiff_t m_iHealth ", 2);
-    uintptr_t m_skeletonInstance = getAddress(session, "constexpr std::ptrdiff_t m_skeletonInstance ", 2);
+    uintptr_t m_iHealth          = getAddress(session, "m_iHealth", 2);
+    uintptr_t m_skeletonInstance = getAddress(session, "m_skeletonInstance", 2);
 
     /* delay to ensure every address is obtained before closing the session */
     std::this_thread::sleep_for(std::chrono::milliseconds(25));
@@ -32,18 +31,3 @@ int main()
 
     return 0;
 }
-~~~
-In this case when reading from client_dll.hpp there will be multiple matches for the address name, so you will have to be more specific.
-
-Example of **incorrect** usage when reading from client_dll:
-~~~cpp
-namespace client_dll {
-	uintptr_t m_iHealth = getAddress(session, "m_iHealth", 2); /* returns 0 */
-}
-~~~
-Example of **correct** usage:
-~~~cpp
-namespace client_dll {
-	uintptr_t m_iHealth = getAddress(session, "constexpr std::ptrdiff_t m_iHealth ", 2); /* returns correct data */
-}
-~~~
