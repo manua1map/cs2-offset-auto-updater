@@ -3,7 +3,6 @@
 #include <sstream>
 #include <vector>
 #include "web.h"
-#include "sk.h"
 
 namespace updater
 {
