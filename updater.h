@@ -6,7 +6,7 @@
 
 namespace updater
 {
-    inline const bool print_addr = true;
+    inline const bool print_addr = false;
     inline int total_succeeded = 0;
     inline int total_scanned = 0;
 
