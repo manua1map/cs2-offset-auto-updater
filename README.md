@@ -1,4 +1,4 @@
-A very simple and lightweight auto offset updater that can used for any game. It works by downloading the URL contents of the offsets on [a2x's dumper github repository](https://github.com/a2x/cs2-dumper).
+A very simple and lightweight auto offset updater that can used for any game both externally and internally. It works by downloading the URL contents of the offsets on [a2x's dumper github repository](https://github.com/a2x/cs2-dumper).
 
 I recommend you output each address ensuring it's correct, you can do so by changing ```print_addr``` in updater.h to true.
 
