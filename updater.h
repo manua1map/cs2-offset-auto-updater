@@ -45,21 +45,21 @@ namespace updater
         return results;
     }
 
-    uintptr_t GetAddress(web::URLSession session, const std::string& addrName, int fileType)
+    uintptr_t GetAddress(web::URLSession session, const std::string& addr_name, int file_type)
     {
         std::string output_url = "https://raw.githubusercontent.com/a2x/cs2-dumper/refs/heads/main/output";
-        std::string formatted_name = addrName;
+        std::string formatted_name = addr_name;
 
         total_scanned += 1;
 
-        if (fileType == FILE_OFFSETS)
+        if (file_type == FILE_OFFSETS)
             output_url += "/offsets.hpp";
-        else if (fileType == FILE_CLIENTDLL)
+        else if (file_type == FILE_CLIENTDLL)
         {
             output_url += "/client_dll.hpp";
 
-            if (addrName.rfind("constexpr std::ptrdiff_t ", 0) != 0)
-                formatted_name = "constexpr std::ptrdiff_t " + addrName + " = ";
+            if (addr_name.rfind("constexpr std::ptrdiff_t ", 0) != 0)
+                formatted_name = "constexpr std::ptrdiff_t " + addr_name + " = ";
         }
 
         if (!session.OpenSession() || !session.OpenURL(output_url))
@@ -78,14 +78,14 @@ namespace updater
                 total_succeeded += 1;
 
                 if(print_addr)
-                    std::cout << "[>>] " << addrName << " -> 0x" << std::hex << result_addr << std::dec << "\n";
+                    std::cout << "[>>] " << addr_name << " -> 0x" << std::hex << result_addr << std::dec << "\n";
 
                 return result_addr;
             }
         }
 
         if (print_addr)
-            std::cout << "[>>] " << addrName << " is invalid\n";
+            std::cout << "[>>] " << addr_name << " is invalid\n";
 
         return 0;
     }
