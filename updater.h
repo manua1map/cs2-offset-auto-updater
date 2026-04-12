@@ -7,8 +7,8 @@
 namespace updater
 {
     inline const bool print_addr = false;
-    inline int total_succeeded = 0;
     inline int total_scanned = 0;
+    inline int total_valid = 0;
 
     #define FILE_OFFSETS 1
     #define FILE_CLIENTDLL 2
@@ -75,7 +75,7 @@ namespace updater
 
             if (result_addr)
             {
-                total_succeeded += 1;
+                total_valid += 1;
 
                 if(print_addr)
                     std::cout << "[>>] " << addr_name << " -> 0x" << std::hex << result_addr << std::dec << "\n";
