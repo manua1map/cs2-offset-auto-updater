@@ -78,14 +78,14 @@ namespace updater
                 total_valid += 1;
 
                 if(print_addr)
-                    std::cout << "[>>] " << addr_name << " -> 0x" << std::hex << result_addr << std::dec << "\n";
+                    std::cout << "[updater] " << addr_name << " -> 0x" << std::hex << result_addr << std::dec << "\n";
 
                 return result_addr;
             }
         }
 
         if (print_addr)
-            std::cout << "[>>] " << addr_name << " is invalid\n";
+            std::cout << "[updater] " << addr_name << " is invalid\n";
 
         return 0;
     }
