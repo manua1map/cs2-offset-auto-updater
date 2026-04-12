@@ -25,5 +25,5 @@ void UpdateOffsets()
 
     std::this_thread::sleep_for(std::chrono::milliseconds(250));
     updater::CloseWeb(session);
-    std::cout << "[>>] " << updater::total_succeeded << "/" << updater::total_scanned << " addresses updated\n";
+    std::cout << "[>>] " << updater::total_valid << "/" << updater::total_scanned << " addresses updated\n";
 }
