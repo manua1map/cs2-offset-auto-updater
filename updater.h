@@ -6,12 +6,13 @@
 
 namespace updater
 {
-    inline const bool print_addr = false;
-    inline int total_scanned = 0;
-    inline int total_valid = 0;
+    inline constexpr bool print_addr = false;
 
     #define FILE_OFFSETS 1
     #define FILE_CLIENTDLL 2
+
+    inline int total_scanned = 0;
+    inline int total_valid = 0;
 
     inline void CloseWeb(web::URLSession session)
     {
