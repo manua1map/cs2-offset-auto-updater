@@ -7,7 +7,6 @@ I recommend you output each address ensuring it's correct, you can do so by chan
 ## Example usage
 ~~~cpp
 #include "updater.h"
-#include "web.h"
 
 void UpdateOffsets()
 {
